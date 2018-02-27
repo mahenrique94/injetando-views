@@ -9,24 +9,24 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText et_nome;
-    private Button btn_ola;
-    private TextView tv_nome;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.btn_ola = findViewById(R.id.btn_ola);
-        this.et_nome = findViewById(R.id.et_nome);
-        this.tv_nome = findViewById(R.id.tv_nome);
+        Button btnOla = findViewById(R.id.btn_ola);
+        final EditText etNome = findViewById(R.id.et_nome);
+        final TextView tvNome = findViewById(R.id.tv_nome);
 
-        this.btn_ola.setOnClickListener(new View.OnClickListener() {
+        btnOla.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!et_nome.getText().toString().equals("")) {
-                    tv_nome.setText(String.format("Olá %s", et_nome.getText().toString()));
+                String nome = etNome.getText().toString();
+                if (nome.equals("")) {
+                    etNome.setError("Campo obrigatório");
+                } else {
+                    String mensagemDeOla = "Olá " + nome;
+                    tvNome.setText(mensagemDeOla);
                 }
             }
         });
